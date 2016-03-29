@@ -1,0 +1,4 @@
+app_homepage:
+  resource: "@AppBundle/Controller/Article/"
+  type:     annotation
+  prefix:   /article
