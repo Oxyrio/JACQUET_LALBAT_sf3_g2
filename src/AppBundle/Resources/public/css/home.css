@@ -1,4 +1,17 @@
 body {
-    background: green;
 
+}
+
+body h1 {
+    text-align: center;
+
+}
+
+h1 {
+    border : 1px solid orangered;
+
+}
+
+body p {
+    text-align: center;
 }
