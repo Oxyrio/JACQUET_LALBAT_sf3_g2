@@ -12,13 +12,28 @@ class ArticleController extends Controller
 {
     /**
      * @Route("/list")
-     *
      */
     public function listAction()
     {
-        return new Response('List of my new articles');
-    }
+        $tutorials = [
+            [
+                'id' => 2,
+                'name' => 'Symfony2'
+            ],
+            [
+                'id' => 5,
+                'name' => 'Wordpress'
+            ],
+            [
+                'id' => 9,
+                'name' => 'Laravel'
+            ],
+        ];
 
+        return $this->render('AppBundle:Article:list.html.twig', [
+            'tutorials' => $tutorials,
+        ]);
+    }
 
     // Création d'une nouvelle page => article/show/id
 
@@ -29,25 +44,28 @@ class ArticleController extends Controller
      */
     public function showAction($id, Request $request)
     {
-        // dump($request);die;
-        /* $tag = $request->query->get('tag'); // Récupère les paramètres en GET
+        //dump($request);die;
 
+        $tag = $request->query->get('tag');
 
-        return new Response('Affiche moi l\'article avec l\'id: '.$id.'avec le tag '.$tag);*/
-
+        return new Response(
+            'Affiche moi l\'article avec l\'id: '.$id.'avec le tag '.$tag
+        );
     }
 
     /**
-     * @param $articleName
-     *
      * @Route("/show/{articleName}")
+     *
+     * @param $articleName
      *
      * @return Response
      */
     public function showArticleNameAction($articleName)
     {
         return $this->render('AppBundle:Article:index.html.twig', [
-        'articleName' => $articleName
+            'articleName' => $articleName,
         ]);
     }
+
+
 }
