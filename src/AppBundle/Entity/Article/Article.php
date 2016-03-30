@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Article;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Article
@@ -63,6 +64,10 @@ class Article
      */
     private $updatedAt;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     /**
      * Get id
