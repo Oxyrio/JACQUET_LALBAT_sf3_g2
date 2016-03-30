@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundl\Antispam;
+namespace AppBundle\Antispam;
 /**
  * Created by PhpStorm.
  * User: aymejacquet
