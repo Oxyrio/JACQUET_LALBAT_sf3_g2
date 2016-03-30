@@ -2,3 +2,22 @@ app_homepage:
   resource: "@AppBundle/Controller/Article/"
   type:     annotation
   prefix:   /article
+
+movie:
+  resource: "@AppBundle/Controller/Movie/"
+  type:     annotation
+  prefix:   /movie
+
+paint:
+  resource: "@AppBundle/Controller/Paint/"
+  type:     annotation
+  prefix:   /paint
+
+picture:
+  resource: "@AppBundle/Controller/Picture/"
+  type:     annotation
+  prefix:   /picture
+
+home:
+  resource: "@AppBundle/Controller/HomeController.php"
+  type:     annotation
