@@ -13,4 +13,9 @@
 {% block body %}
     {{ parent() }}
     <p>This is my new page</p>
+
+
+    {%  include('AppBundle:Article/Partial:list.html.twig') %}
+
+
 {% endblock %}

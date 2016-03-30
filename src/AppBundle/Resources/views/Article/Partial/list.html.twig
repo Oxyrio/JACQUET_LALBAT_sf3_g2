@@ -1,9 +1,6 @@
 <ul>
-    {% for tutorial in tutorials %} <!-- Pour chaque tutoriel dans notre tableau tutoriel -->
-        <li>{{ tutorial.id }}</li>
-        <li>{{ tutorial.name }}</li>
+    {% for post in articles %} <!-- Pour chaque tutoriel dans notre tableau tutoriel -->
+        <li>{{ post.title }}</li>
+        <li>{{ post.content }}</li>
     {% endfor %}
-
-
-
 </ul>
