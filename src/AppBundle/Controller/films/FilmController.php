@@ -15,7 +15,7 @@ class FilmController extends Controller
      */
     public function listAction()
     {
-        $films = [
+         $films = [
             [
                 'id' => 2,
                 'name' => 'Star Wars'
@@ -33,6 +33,7 @@ class FilmController extends Controller
         return $this->render('AppBundle:films/Partial:film.html.twig', [
             'films' => $films,
         ]);
+
 
 
     }

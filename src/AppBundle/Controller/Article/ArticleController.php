@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller\Article; // OU se trouve physiquement notre fichier
 
+use AppBundle\Form\Type\Article\TagType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +16,7 @@ class ArticleController extends Controller
      */
     public function listAction()
     {
-        $tutorials = [
+        /* $tutorials = [
             [
                 'id' => 2,
                 'name' => 'Symfony2'
@@ -32,6 +33,17 @@ class ArticleController extends Controller
 
         return $this->render('AppBundle:Article:index.html.twig', [
             'tutorials' => $tutorials,
+        ]); */
+        $manager = $this->getDoctrine()->getManager();
+
+        $articleRepository = $manager->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findAll();
+
+
+
+        return $this->render('AppBundle:Home:index.html.twig', [
+            'articles' => $articles,
         ]);
     }
 
@@ -88,11 +100,22 @@ class ArticleController extends Controller
     }
 
     /**
-     * @Route("/new")
+     * @Route("/tag/new")
      */
 
-    public function newAction(){
+    public function newAction(Request $request)
+    {
+        $form = $this->createForm(TagType::class);
 
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+            dump($form->getData());die;
+        }
+
+        return $this->render('AppBundle:Article:tag.new.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 
