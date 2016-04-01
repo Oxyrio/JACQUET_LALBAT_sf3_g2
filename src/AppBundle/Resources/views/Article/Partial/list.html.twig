@@ -1,6 +1,15 @@
-<ul>
-    {% for post in articles %} <!-- Pour chaque tutoriel dans notre tableau tutoriel -->
-        <li>{{ post.title }}</li>
-        <li>{{ post.content }}</li>
-    {% endfor %}
-</ul>
+<div class="">
+    <div class="">
+        <ul>
+        {% for article in articles %}
+            <blockquote>
+                <p class="text-warning">{{ article.title }}</p>
+                <p class="text-info">{{ article.content }}</p>
+                <small>Crée le {{ article.createdAt|date('d/m/Y H:i') }}</small>
+                <a href="{{ path('article_author', { 'author': article.author }) }}">{{ article.author }}</a>
+            </blockquote>
+
+        {% endfor %}
+        </ul>
+    </div>
+</div>

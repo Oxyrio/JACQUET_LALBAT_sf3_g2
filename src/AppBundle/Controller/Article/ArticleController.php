@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends Controller
 {
     /**
-     * @Route("/list")
+     * @Route("/", name="_article")
      */
     public function listAction()
     {
@@ -65,6 +65,34 @@ class ArticleController extends Controller
         return $this->render('AppBundle:Article:index.html.twig', [
             'articleName' => $articleName,
         ]);
+    }
+
+    /**
+     * @Route("/author", name="article_author")
+     */
+    public function authorAction(Request $request)
+    {
+        $author = $request->query->get('author');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findBy([
+            'author' => $author,
+        ]);
+
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * @Route("/new")
+     */
+
+    public function newAction(){
+
     }
 
 
