@@ -3,6 +3,7 @@
 
 namespace AppBundle\Controller\Article; // OU se trouve physiquement notre fichier
 
+use AppBundle\Entity\Article\Tag;
 use AppBundle\Form\Type\Article\TagType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,20 @@ class ArticleController extends Controller
         return $this->render('AppBundle:Article:index.html.twig', [
             'tutorials' => $tutorials,
         ]); */
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findAll();
+
+        return $this->render('AppBundle:Home:index.html.twig', [
+            'articles' => $articles,
+        ]);
+
+        /*
+
         $manager = $this->getDoctrine()->getManager();
 
         $articleRepository = $manager->getRepository('AppBundle:Article\Article');
@@ -44,7 +59,7 @@ class ArticleController extends Controller
 
         return $this->render('AppBundle:Home:index.html.twig', [
             'articles' => $articles,
-        ]);
+        ]);*/
     }
 
     // Création d'une nouvelle page => article/show/id
@@ -109,8 +124,27 @@ class ArticleController extends Controller
 
         $form->handleRequest($request);
 
+        /* $stringUtil = $this->get('string.util');
+
+        $slug = $stringUtil->slugify('mon slug');
+        dump($slug);die; */
+
+
         if ($form->isValid()){
-            dump($form->getData());die;
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var Tag $slug */
+            $tag = $form->getData();
+
+            $stringUtil = $this->get('string.util');
+
+            $slug = $stringUtil->slugify($tag->getName());
+            $tag->setSlug($slug);
+
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirectToRoute('_article');
         }
 
         return $this->render('AppBundle:Article:tag.new.html.twig', [

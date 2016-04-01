@@ -20,7 +20,7 @@ class TagType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('slug')
+            /*->add('slug')*/
             ->add('save', SubmitType::class)
         ;
     }
