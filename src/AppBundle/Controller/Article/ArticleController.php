@@ -118,7 +118,7 @@ class ArticleController extends Controller
      * @Route("/tag/new")
      */
 
-    public function newAction(Request $request)
+    public function newTagAction(Request $request)
     {
         $form = $this->createForm(TagType::class);
 
@@ -152,5 +152,15 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     *
+     *
+     * @Route("/new)
+     *
+     *
+     */
+    public function newArticleAction(Request $request)
+    {
 
+    }
 }
