@@ -67,5 +67,32 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/author, name="article_author")
+     */
+    public function authorAction(Request $request)
+    {
+        $author = $request->query->get('author');
+
+        $em = $this->getDoctrine()->getManager();
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findBy([
+            'author' => $author,
+        ]);
+
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * @Route("/new")
+     */
+    public function newAction()
+    {
+
+    }
+
 
 }
