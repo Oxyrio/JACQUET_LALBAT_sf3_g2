@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function listAction()
     {
-        $tutorials = [
+        /* $tutorials = [
             [
                 'id' => 2,
                 'name' => 'Symfony2'
@@ -33,6 +33,20 @@ class ArticleController extends Controller
 
         return $this->render('AppBundle:Article:index.html.twig', [
             'tutorials' => $tutorials,
+        ]); */
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findAll();
+
+
+
+        return $this->render('AppBundle:Home:index.html.twig', [
+            'articles' => $articles,
         ]);
     }
 
@@ -91,14 +105,34 @@ class ArticleController extends Controller
     /**
      * @Route("/tag/new")
      */
+
     public function newAction(Request $request)
     {
         $form = $this->createForm(TagType::class);
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            dump($form->getData());die;
+
+
+
+
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var Tag $tag */
+
+            $tag = $form->getData();
+
+            $stringUtil = $this->get('string.util');
+
+            $slug = $stringUtil->slugify('mon slug');
+            $tag->setSlug($slug);
+
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirectToRoute('_article');
         }
 
         return $this->render('AppBundle:Article:tag.new.html.twig', [
