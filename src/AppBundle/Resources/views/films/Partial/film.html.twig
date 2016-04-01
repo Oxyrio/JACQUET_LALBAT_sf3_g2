@@ -1,0 +1,17 @@
+{% extends('::base.html.twig') %}
+
+{% block body %}
+    <div class="">
+        <div class="">
+            <ul>
+                {% for film in films %}
+                    <blockquote>
+                        <p class="text-warning">{{ film.id }}</p>
+                        <p class="text-info">{{ film.name }}</p>
+                    </blockquote>
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{%  endblock %}

@@ -5,4 +5,7 @@ app_homepage:
 home:
   resource: "@AppBundle/Controller/HomeController.php"
   type: annotation
-
+films:
+  resource: "@AppBundle/Controller/films"
+  type:     annotation
+  prefix:   /films

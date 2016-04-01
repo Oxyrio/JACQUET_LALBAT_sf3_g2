@@ -1,0 +1,10 @@
+{%  extends('::base.html.twig') %}
+
+{% block header %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Liste d'article</h1>
+    {%  include('AppBundle:films/Partial:film.html.twig') %}
+{%  endblock %}
