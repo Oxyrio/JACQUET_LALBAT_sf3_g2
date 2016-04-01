@@ -152,16 +152,15 @@ class ArticleController extends Controller
         ]);
     }
 
-
-    /**
-     * @Route("/new")
+    /*
      *
      *
-     */
+     * @Route("/new)
+     *
+     *
+     *
     public function newArticleAction(Request $request)
     {
 
-    }
-
-
+    }*/
 }
