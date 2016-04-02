@@ -3,7 +3,9 @@
 
 namespace AppBundle\Controller\Article; // OU se trouve physiquement notre fichier
 
+use AppBundle\Entity\Article\Article;
 use AppBundle\Entity\Article\Tag;
+use AppBundle\Form\Type\Article\ArticleType;
 use AppBundle\Form\Type\Article\TagType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -172,15 +174,44 @@ class ArticleController extends Controller
         ]);
     }
 
-    /*
-     *
-     *
-     * @Route("/new)
-     *
-     *
-     *
+
+
+    /**
+     * @Route("/new", name="article_create")
+     */
     public function newArticleAction(Request $request)
     {
+        $form = $this->createForm(ArticleType::class);
 
-    }*/
+        $form->handleRequest($request);
+
+        /* $stringUtil = $this->get('string.util');
+
+        $slug = $stringUtil->slugify('mon slug');
+        dump($slug);die; */
+
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var Article $article */
+            $article = $form->getData();
+            $sluggy = $article->getTitle();
+            $stringUtil = $this->get('string.util');
+
+            $slug = $stringUtil->slugify($sluggy);
+            $article->setSlug($slug);
+
+            $em->persist($article);
+            $em->flush();
+
+            return $this->redirectToRoute('_article');
+        }
+
+        return $this->render('AppBundle:Article:tag.new.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
 }

@@ -1,0 +1,16 @@
+{% extends('::base.html.twig') %}
+
+
+{% block body %}
+
+    {{ parent() }}
+
+    <div class="">
+        <h1 style="text-align: center; color: #c09853;">{{ article.title }}</h1>
+
+        <p>{{ article.content }}</p>
+        <p>Crée le {{ article.createdAt|date('d/m/Y H:i') }}</p>
+        <a href="{{ path('article_author', { 'author': article.author }) }}">{{ article.author }}</a>
+        <a href="{{ path('article_tag', { 'tag': article.tag}) }}">{{ article.tag }}</a>
+    </div>
+{% endblock %}
