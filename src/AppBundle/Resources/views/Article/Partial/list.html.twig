@@ -6,6 +6,7 @@
         {% for article in articles %}
             <blockquote>
                 <p class="text-warning">{{ article.title }}</p>
+                <small>Tag : <a href="{{ path('article_tag', { 'tag': article.tag}) }}">{{ article.tag }}</a></small>
                 <p class="text-info">{{ article.content }}</p>
                 <small>Crée le {{ article.createdAt|date('d/m/Y H:i') }}</small>
                 <a href="{{ path('article_author', { 'author': article.author }) }}">par {{ article.author }}</a>
