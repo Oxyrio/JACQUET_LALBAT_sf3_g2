@@ -2,6 +2,23 @@
 
 
 {% block body %}
-    <h1>Ajout d'un article</h1>
-   {{ form(form) }}
+
+<div class="col-md-8 col-md-offset-2">
+    <h1 style="text-align: center;">Ajout d'un article</h1>
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_widget(form.title,  { 'attr': {'class': 'form-control', 'placeholder': 'Titre'} }) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.content,  { 'attr': {'class': 'form-control', 'placeholder': 'Contenu'} }) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.author,  { 'attr': {'class': 'form-control', 'placeholder': 'Auteur'} }) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.tag,  { 'attr': {'class': 'form-control', 'placeholder': 'Tag'} }) }}
+    </div>
+    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-sucess'} }) }}
+    {{ form_end(form) }}
+</div>
 {%  endblock %}
