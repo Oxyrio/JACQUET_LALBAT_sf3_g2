@@ -99,7 +99,7 @@ class ArticleController extends Controller
     /**
      * @Route("/author", name="article_author")
      */
-    public function authorAction(Request $request)
+    public function authorAction(Request $request) //pour pouvoir accéder aux articles d'un auteur en particulier
     {
         $author = $request->query->get('author');
 
@@ -119,7 +119,7 @@ class ArticleController extends Controller
     /**
      * @Route("/tag", name="article_tag")
      */
-    public function tagAction(Request $request)
+    public function tagAction(Request $request) //pour pouvoir accéder aux articles avec un tag en particulier
     {
         $tag = $request->query->get('tag');
 
@@ -140,7 +140,7 @@ class ArticleController extends Controller
      * @Route("/tag/new")
      */
 
-    public function newTagAction(Request $request)
+    public function newTagAction(Request $request) //envoie formulaire tag en bdd
     {
         $form = $this->createForm(TagType::class);
 
@@ -179,11 +179,11 @@ class ArticleController extends Controller
     /**
      * @Route("/new", name="article_create")
      */
-    public function newArticleAction(Request $request)
+    public function newArticleAction(Request $request) //envois formulaire article en bdd
     {
-        $form = $this->createForm(ArticleType::class);
+        $form = $this->createForm(ArticleType::class); //création du formulaire
 
-        $form->handleRequest($request);
+        $form->handleRequest($request); //récupération de la requete
 
         /* $stringUtil = $this->get('string.util');
 
@@ -191,25 +191,27 @@ class ArticleController extends Controller
         dump($slug);die; */
 
 
-        if ($form->isValid()){
+        if ($form->isValid()){                          //vérif si le formulaire envoyé est valide
             $em = $this->getDoctrine()->getManager();
 
             /** @var Article $article */
             $article = $form->getData();
-            $sluggy = $article->getTitle();
-            $stringUtil = $this->get('string.util');
+            //$sluggy = $article->getTitle();
+            //$stringUtil = $this->get('string.util');
 
-            $slug = $stringUtil->slugify($sluggy);
-            $article->setSlug($slug);
+            //$slug = $stringUtil->slugify($sluggy);
+            //$article->setSlug($slug);
 
             $em->persist($article);
-            $em->flush();
+            $em->flush(); //envois en bdd
 
-            return $this->redirectToRoute('_article');
+            return $this->redirectToRoute('_article');  // si il est valide, cela renvoie sur la page des articles
+                                                        // sinon cela dit que le formulaire n'est pas valide
+                                                        // et demande à l'utilisateur de bien rentrer les données
         }
 
         return $this->render('AppBundle:Article:tag.new.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form->createView(), //affiche la vue de la page création d'article, ici c'est la vue tag.new.html.twig
         ]);
     }
 
