@@ -7,18 +7,18 @@
     <h1 style="text-align: center;">Ajout d'un article</h1>
     {{ form_start(form) }}
     <div class="form-group">
-        {{ form_widget(form.title,  { 'attr': {'class': 'form-control', 'placeholder': 'Titre'} }) }}
+        {{ form_widget(form.title,  { 'attr': {'class': 'form-control', 'placeholder': 'Titre de l\'article'} }) }}
     </div>
     <div class="form-group">
-        {{ form_widget(form.content,  { 'attr': {'class': 'form-control', 'placeholder': 'Contenu'} }) }}
+        {{ form_widget(form.content,  { 'attr': {'class': 'form-control', 'placeholder': 'Contenu de l\'article'} }) }}
     </div>
     <div class="form-group">
-        {{ form_widget(form.author,  { 'attr': {'class': 'form-control', 'placeholder': 'Auteur'} }) }}
+        {{ form_widget(form.author,  { 'attr': {'class': 'form-control', 'placeholder': 'Auteur de l\'article'} }) }}
     </div>
     <div class="form-group">
         {{ form_widget(form.tag,  { 'attr': {'class': 'form-control', 'placeholder': 'Tag'} }) }}
     </div>
-    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-sucess'} }) }}
+    {{ form_widget(form.save, { 'attr': {'class': 'btn btn-danger'} }) }}
     {{ form_end(form) }}
 </div>
 {%  endblock %}
