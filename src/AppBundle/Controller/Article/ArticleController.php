@@ -68,18 +68,34 @@ class ArticleController extends Controller
 
     /**
      *
-     * @Route("/show/{id}", requirements={"id" = "\d+"})
+     * @Route("/show/{id}", requirements={"id" = "\d+"}, name="show_article")
      *
      */
-    public function showAction($id, Request $request)
+    public function showAction(Request $request)
     {
         //dump($request);die;
 
-        $tag = $request->query->get('tag');
+        // = $request->query->get('tag');
 
-        return new Response(
-            'Affiche moi l\'article avec l\'id: '.$id.'avec le tag '.$tag
-        );
+        //return new Response(
+        //    'Affiche moi l\'article avec l\'id: '.$id.'avec le tag '.$tag
+        //);
+
+        $id = $request->query->get('id');
+
+
+        $em = $this->getDoctrine()->getManager();
+        $articleRepository = $em->getRepository('AppBundle:Article\Article');
+
+        $articles = $articleRepository->findBy([
+            'id' => $id,
+        ]);
+
+        return $this->render('AppBundle:Article:index.html.twig', [
+            'articles' => $articles,
+        ]);
+
+
     }
 
     /**

@@ -5,7 +5,7 @@
 
         {% for article in articles %}
             <blockquote>
-                <p class="text-warning"><a href="" style="color: #c09853">{{ article.title }}</a></p>
+                <p class="text-warning"><a href=" {{ path('show_article', { 'id': article.id }) }} " style="color: #c09853">{{ article.title }}</a></p>
                 <small>Tag : <a href="{{ path('article_tag', { 'tag': article.tag}) }}">{{ article.tag }}</a></small>
                 <p class="text-info">{{ article.content }}</p>
                 <small>Crée le {{ article.createdAt|date('d/m/Y H:i') }}</small>
